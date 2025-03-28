@@ -15,7 +15,7 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 0;
 
-type tParams = Promise<{ clerkUserId: string; eventId: string }>;
+type tParams = Promise<{ clerkUserId: string }>;
 
 export default async function BookingPage(props: { params: tParams }) {
   const { clerkUserId } = await props.params;
