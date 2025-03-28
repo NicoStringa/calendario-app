@@ -12,15 +12,15 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 0;
 
-export default async function SuccessPage({
-  params,
-  searchParams,
-}: {
-  params: { clerkUserId: string; eventId: string };
-  searchParams: { startTime: string };
+type tParams = Promise<{ clerkUserId: string; eventId: string }>;
+type tSearchParams = Promise<{ startTime: string }>;
+
+export default async function SuccessPage(props: {
+  params: tParams;
+  searchParams: tSearchParams;
 }) {
-  const { clerkUserId, eventId } = await params;
-  const { startTime } = await searchParams;
+  const { clerkUserId, eventId } = await props.params;
+  const { startTime } = await props.searchParams;
   const event = await db.query.EventTable.findFirst({
     where: ({ clerkUserId: userIdCol, isActive, id }, { eq, and }) =>
       and(eq(isActive, true), eq(userIdCol, clerkUserId), eq(id, eventId)),
