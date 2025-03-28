@@ -37,10 +37,6 @@ import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { createMeeting } from '@/server/actions/meetings';
 
-const schema = z.object({
-  name: z.string(),
-});
-
 export function MeetingForm({
   validTimes,
   eventId,

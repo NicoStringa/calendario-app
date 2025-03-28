@@ -30,11 +30,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '../ui/alert-dialog';
-import { useState, useTransition } from 'react';
-
-const schema = z.object({
-  name: z.string(),
-});
+import { useTransition } from 'react';
 
 export function EventForm({
   event,
