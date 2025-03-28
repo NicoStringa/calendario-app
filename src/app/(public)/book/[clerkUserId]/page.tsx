@@ -15,12 +15,10 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 0;
 
-export default async function BookingPage({
-  params,
-}: {
-  params: { clerkUserId: string };
-}) {
-  const { clerkUserId } = await params;
+type tParams = Promise<{ clerkUserId: string; eventId: string }>;
+
+export default async function BookingPage(props: { params: tParams }) {
+  const { clerkUserId } = await props.params;
 
   const events = await db.query.EventTable.findMany({
     where: ({ clerkUserId: userIdCol, isActive }, { eq, and }) =>
