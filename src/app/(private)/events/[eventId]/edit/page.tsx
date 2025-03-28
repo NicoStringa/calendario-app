@@ -5,12 +5,11 @@ import { auth } from '@clerk/nextjs/server';
 import { notFound } from 'next/navigation';
 
 export const revalidate = 0;
-export default async function EditEventPage({
-  params,
-}: {
-  params: { eventId: string };
-}) {
-  const { eventId } = params;
+
+type tParams = Promise<{ eventId: string }>;
+
+export default async function EditEventPage(props: { params: tParams }) {
+  const { eventId } = await props.params;
 
   const { userId, redirectToSignIn } = await auth();
   if (userId == null) return redirectToSignIn();
